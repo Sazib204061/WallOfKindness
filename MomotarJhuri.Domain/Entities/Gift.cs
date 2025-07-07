@@ -1,11 +1,15 @@
-﻿namespace MomotarJhuri.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace MomotarJhuri.Domain.Entities
 {
     public class Gift
     {
-        int Id { get; set; }
+        public int Id { get; set; }
         public string? Location { get; set; }
-        int GiftDetailId { get; set; }
-        int UserId { get; set; }
-
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        [ValidateNever]
+        public User? User { get; set; } // Navigation property to User entity
     }
 }
