@@ -1,0 +1,126 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<!-- Main Profile Container -->
+<div class="profile-container d-flex align-items-center justify-content-center min-vh-100 bg-light">
+    <div class="profile-summary shadow p-4 rounded bg-white" style="width: 600px;">
+
+        <!-- Header Section with Large Username -->
+        <div class="text-center mb-4">
+            <!-- Large Username Display -->
+            <h1 class="display-4">@Model.UserName</h1>
+
+            <!-- Profile Image Section -->
+            <div class="profile-image-container my-4">
+                @if (!string.IsNullOrEmpty(Model.PhotoLink))
+                {
+                    <img src="@Model.PhotoLink" class="rounded-circle" width="150" height="150" alt="Profile Image">
+                }
+                else
+                {
+                    <!-- Default profile icon if no image -->
+                    <div class="profile-icon-placeholder rounded-circle bg-light d-flex align-items-center justify-content-center"
+                         style="width: 150px; height: 150px; margin: 0 auto;">
+                        <i class="bi bi-person-fill" style="font-size: 5rem;"></i>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div class="profile-section mb-4 p-3 border rounded">
+            <h3 class="section-title border-bottom pb-2 mb-3">
+                <i class="bi bi-person-vcard"></i> Personal Information
+            </h3>
+
+            <!-- Gender -->
+            <div class="profile-field row mb-2">
+                <div class="col-sm-4 fw-bold">Gender:</div>
+                <div class="col-sm-8">@Model.Gender</div>
+            </div>
+
+            <!-- Nationality -->
+            <div class="profile-field row mb-2">
+                <div class="col-sm-4 fw-bold">Nationality:</div>
+                <div class="col-sm-8">@Model.Nationality</div>
+            </div>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="profile-section mb-4 p-3 border rounded">
+            <h3 class="section-title border-bottom pb-2 mb-3">
+                <i class="bi bi-telephone"></i> Contact Information
+            </h3>
+
+            <!-- Email -->
+            <div class="profile-field row mb-2">
+                <div class="col-sm-4 fw-bold">Email:</div>
+                <div class="col-sm-8">@Model.Email</div>
+            </div>
+
+            <!-- Phone -->
+            <div class="profile-field row mb-2">
+                <div class="col-sm-4 fw-bold">Phone:</div>
+                <div class="col-sm-8">@(string.IsNullOrEmpty(Model.PhoneNumber) ? "Not provided" : Model.PhoneNumber)</div>
+            </div>
+
+            <!-- Address -->
+            <div class="profile-field row">
+                <div class="col-sm-4 fw-bold">Address:</div>
+                <div class="col-sm-8">@(string.IsNullOrEmpty(Model.Address) ? "Not provided" : Model.Address)</div>
+            </div>
+        </div>
+
+        <!-- Update Button (Centered at Bottom) -->
+        <div class="text-center mt-4">
+            <a asp-action="EditProfile" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-pencil-square me-2"></i> Update Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* Custom profile page styles */
+        .profile-summary {
+            max-width: 100%;
+        }
+
+        /* Large username display */
+        .display-4 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Profile sections styling */
+        .profile-section {
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            color: #0d6efd;
+            font-size: 1.5rem;
+        }
+
+        /* Profile field rows */
+        .profile-field {
+            padding: 8px 0;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 576px) {
+            .profile-field div {
+                width: 100%;
+                padding-bottom: 5px;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

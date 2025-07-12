@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MomotarJhuri.Domain.Entities;
 using MomotarJhuri.Web.ViewModel;
@@ -10,18 +11,15 @@ namespace MomotarJhuri.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        private readonly ILogger<ApplicationUser> _logger;
+        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILogger<ApplicationUser> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-
-        }
-        public IActionResult Index()
-        {
-            return View();
+            _logger = logger;
         }
 
-
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -30,7 +28,7 @@ namespace MomotarJhuri.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
@@ -44,7 +42,8 @@ namespace MomotarJhuri.Web.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded) { 
+                if (result.Succeeded)
+                {
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -54,9 +53,88 @@ namespace MomotarJhuri.Web.Controllers
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-                   
+
             }
             return View();
         }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
+
+                var result = await _signInManager.PasswordSignInAsync(
+                    user.UserName,  // Use username here
+                    model.Password,
+                    isPersistent: false,
+                    lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User{UserName} logged in.", user.UserName);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+
+            return View(model);
+        }
+
+
+        [HttpGet]
+        [Authorize] // Ensure only logged-in users can access
+        public async Task<IActionResult> Profile()
+        {
+            // Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            //user = null;
+
+            if (user == null)
+            {
+                return Challenge(); // Will redirect to login if user not found
+            }
+
+            // Map to a view model
+            var model = new ProfileVM
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                PhotoLink = user.PhotoLink,
+                Nationality = user.Nationality,
+                Gender = user.Gender
+            };
+
+            return View(model);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction("Index", "Home");
+        }
+
+        
     }
 }

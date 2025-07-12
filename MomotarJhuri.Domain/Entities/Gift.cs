@@ -9,7 +9,7 @@ namespace MomotarJhuri.Domain.Entities
         public string? Location { get; set; }
         [ForeignKey("User")]
         public int UserId { get; set; }
-        [ValidateNever]
-        public User? User { get; set; } // Navigation property to User entity
+        //[ValidateNever]
+        //public User? User { get; set; } // Navigation property to User entity
     }
 }
