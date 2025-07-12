@@ -1,4 +1,5 @@
-﻿@model ProfileVM
+﻿@using MomotarJhuri.Web.Areas.GeneralUser.ViewModel
+@model ProfileVM
 @{
     ViewData["Title"] = "User Profile";
 }
@@ -10,7 +11,7 @@
         <!-- Header Section with Large Username -->
         <div class="text-center mb-4">
             <!-- Large Username Display -->
-            <h1 class="display-4">@Model.UserName</h1>
+            <h1 class="display-4">@Model.FullName</h1>
 
             <!-- Profile Image Section -->
             <div class="profile-image-container my-4">

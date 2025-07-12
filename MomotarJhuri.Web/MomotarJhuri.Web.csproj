@@ -18,4 +18,9 @@
     <ProjectReference Include="..\MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Modarator\" />
+    <Folder Include="Areas\Admin\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿@model RegisterVM
+﻿@using MomotarJhuri.Web.Areas.GeneralUser.ViewModel
+@model RegisterVM
 
 @{
     ViewData["Title"] = "Register";
@@ -15,12 +16,12 @@
                 <h5 class="border-bottom pb-2 mb-3">Personal Information</h5>
 
                 <div class="mb-3">
-                    <label asp-for="UserName" class="form-label">Full Name</label>
+                    <label asp-for="FullName" class="form-label">Full Name</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
-                        <input asp-for="UserName" class="form-control" placeholder="Your full name" />
+                        <input asp-for="FullName" class="form-control" placeholder="Your full name" />
                     </div>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">

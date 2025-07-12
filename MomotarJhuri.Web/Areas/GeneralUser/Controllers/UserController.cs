@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Web.ViewModel;
+using MomotarJhuri.Web.Areas.GeneralUser.ViewModel;
 
-namespace MomotarJhuri.Web.Controllers
+namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
 {
 
     public class UserController : Controller
@@ -30,9 +30,14 @@ namespace MomotarJhuri.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //convert FullName to user name. Because without username Data cannot insert into Identity database.
+                var temp = model.FullName;
+                temp = temp.Trim().ToLower();
+                temp = temp.Replace(" ", "");
                 var user = new ApplicationUser
                 {
-                    UserName = model.UserName,
+                    UserName = temp,
+                    FullName = model.FullName,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     Address = model.Address,
@@ -79,14 +84,14 @@ namespace MomotarJhuri.Web.Controllers
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(
-                    user.UserName,  // Use username here
+                    user.UserName,  // Use UserName here
                     model.Password,
                     isPersistent: false,
                     lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User{UserName} logged in.", user.UserName);
+                    _logger.LogInformation("User {UserName} logged in.", user.UserName);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -113,7 +118,7 @@ namespace MomotarJhuri.Web.Controllers
             // Map to a view model
             var model = new ProfileVM
             {
-                UserName = user.UserName,
+                FullName = user.FullName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,

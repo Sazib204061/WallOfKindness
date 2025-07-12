@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MomotarJhuri.Web.Models;
 
-namespace MomotarJhuri.Web.Controllers
+namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
 {
     public class HomeController : Controller
     {
