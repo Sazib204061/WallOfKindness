@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MomotarJhuri.Application.Gifts;
 using MomotarJhuri.Domain.Entities;
 using MomotarJhuri.Infractructure.Data;
 
@@ -13,6 +14,8 @@ option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
      .AddEntityFrameworkStores<ApplicationDbContext>()
      .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IGiftServices, GiftServices>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

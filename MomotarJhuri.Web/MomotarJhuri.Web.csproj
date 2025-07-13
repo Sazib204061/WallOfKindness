@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MomotarJhuri.Application\MomotarJhuri.Application.csproj" />
     <ProjectReference Include="..\MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj" />
   </ItemGroup>
 

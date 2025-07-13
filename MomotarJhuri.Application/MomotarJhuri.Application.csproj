@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MomotarJhuri.Domain\MomotarJhuri.Domain.csproj" />
+    <ProjectReference Include="..\MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj" />
+  </ItemGroup>
+
 </Project>
