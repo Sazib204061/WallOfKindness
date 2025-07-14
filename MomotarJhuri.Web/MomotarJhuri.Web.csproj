@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Modarator\" />
     <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\Modarator\ViewModels\" />
   </ItemGroup>
 
 </Project>

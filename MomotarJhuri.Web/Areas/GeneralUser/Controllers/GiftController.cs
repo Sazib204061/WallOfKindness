@@ -3,6 +3,7 @@ using MomotarJhuri.Application.Gifts;
 
 namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
 {
+    [Area("GeneralUser")]
     public class GiftController : Controller
     {
         private readonly ILogger<HomeController> _logger;

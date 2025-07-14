@@ -4,6 +4,7 @@ using MomotarJhuri.Web.Models;
 
 namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
 {
+    [Area("GeneralUser")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

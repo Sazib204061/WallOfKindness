@@ -7,6 +7,7 @@ using MomotarJhuri.Web.Areas.GeneralUser.ViewModel;
 namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
 {
 
+    [Area("GeneralUser")]
     public class UserController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
