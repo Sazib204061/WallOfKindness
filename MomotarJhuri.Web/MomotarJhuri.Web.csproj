@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\**" />
+    <Compile Remove="Areas\Modarator\**" />
+    <Content Remove="Areas\Admin\**" />
+    <Content Remove="Areas\Modarator\**" />
+    <EmbeddedResource Remove="Areas\Admin\**" />
+    <EmbeddedResource Remove="Areas\Modarator\**" />
+    <None Remove="Areas\Admin\**" />
+    <None Remove="Areas\Modarator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,11 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MomotarJhuri.Application\MomotarJhuri.Application.csproj" />
     <ProjectReference Include="..\MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Modarator\" />
-    <Folder Include="Areas\Admin\" />
   </ItemGroup>
 
 </Project>
