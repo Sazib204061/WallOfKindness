@@ -6,8 +6,7 @@
 
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Our Gift Collection</h1>
-        <a asp-action="Create" class="btn btn-primary">Add New Gift</a>
+        <h1>Gifts Collection</h1>
     </div>
 
     <div class="row g-4">
@@ -19,10 +18,11 @@
                     <div class="card-body">
                         <h5 class="card-title">@gift.Title</h5>
                         <p class="text-muted"><i class="bi bi-geo-alt"></i> @gift.Location</p>
-                        <p class="card-text">@gift.Description</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            @* <span class="text-primary fw-bold">$@gift.Price.ToString("N2")</span> *@
-                            @* <a asp-action="Details" asp-route-id="@gift.Title" class="btn btn-sm btn-outline-primary">Details</a> *@
+                        @* <p class="card-text">@gift.Description</p> *@
+                        <span class="badge bg-primary">@gift.GiftStatus</span>
+                       
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a asp-controller="Gift" asp-action="GiftDetail" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-primary">Details</a>
                         </div>
                     </div>
                 </div>

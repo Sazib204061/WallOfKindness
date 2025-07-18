@@ -1,0 +1,34 @@
+﻿@model GiftVM
+
+@{
+    ViewData["Title"] = "Gift Details";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.PrimaryImageUrl" alt="@Model.Title" class="img-fluid rounded shadow-sm mb-3" style="max-height: 400px; object-fit: cover;">
+            <div class="d-flex flex-wrap gap-2">
+                @if (Model.ImageUrls != null && Model.ImageUrls.Any())
+                {
+                    foreach (var img in Model.ImageUrls)
+                    {
+                        <img src="@img" class="img-thumbnail" style="height: 100px; width: 100px; object-fit: cover;" />
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h2>@Model.Title</h2>
+            <p class="text-muted"><i class="bi bi-geo-alt"></i> @Model.Location</p>
+            <p>@Model.Description</p>
+            <span class="badge bg-primary">@Model.GiftStatus</span>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GiftVM>
+
+@{
+    ViewData["Title"] = "Gift List";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Gifts Collection</h1>
+        <a asp-action="Create" class="btn btn-primary">Add New Gift</a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var gift in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@gift.PrimaryImageUrl" class="card-img-top" alt="@gift.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@gift.Title</h5>
+                        <p class="text-muted"><i class="bi bi-geo-alt"></i> @gift.Location</p>
+                        <p class="card-text">@gift.Description</p>
+                        <p class="text-primary outer-line-primary">@gift.GiftStatus</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="Details" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                            <a asp-action="Edit" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-warning ms-2">Edit</a>
+                            <form asp-action="Delete" asp-route-id="@gift.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this gift?');" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-danger ms-2">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
