@@ -9,6 +9,8 @@ namespace MomotarJhuri.Application.Gifts
         Task<GiftVM> GetGiftFullDetailsById(int Id);
         Task CreateGiftWithDetailsAsync(Gift gift);
         Task DeleteGiftWithDelailsAsync(int Id);
+        Task UpdateGiftWithDelailsAsync(Gift gift);
+
 
     }
 }
