@@ -248,28 +248,23 @@ namespace MomotarJhuri.Infractructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Gifts");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Location = "Dhaka, Mirpur-10",
-                            Title = "Birthday Gift Package"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Location = "Dhaka, Mirpur-12",
-                            Title = "Anniversary Special"
-                        });
+                    b.ToTable("Gifts");
                 });
 
             modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
@@ -294,23 +289,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.HasIndex("GiftId")
                         .IsUnique();
 
-                    b.ToTable("GiftDetail");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Description of gift-1",
-                            GiftId = 1,
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Description of gift-2",
-                            GiftId = 2,
-                            Status = 0
-                        });
+                    b.ToTable("GiftDetails");
                 });
 
             modelBuilder.Entity("MomotarJhuri.Domain.Entities.Image", b =>
@@ -333,26 +312,6 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.HasIndex("GiftId");
 
                     b.ToTable("Images");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            GiftId = 1,
-                            ImageUrl = "images/gifts/birthday-package.jpg"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            GiftId = 1,
-                            ImageUrl = "images/gifts/birthday-package-alt.jpg"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            GiftId = 2,
-                            ImageUrl = "images/gifts/anniversary-special.jpg"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -406,6 +365,17 @@ namespace MomotarJhuri.Infractructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+                {
+                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("Gifts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
                 {
                     b.HasOne("MomotarJhuri.Domain.Entities.Gift", "Gift")
@@ -426,6 +396,11 @@ namespace MomotarJhuri.Infractructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Gifts");
                 });
 
             modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>

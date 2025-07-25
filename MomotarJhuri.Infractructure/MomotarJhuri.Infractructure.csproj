@@ -25,4 +25,9 @@
     <ProjectReference Include="..\MomotarJhuri.Domain\MomotarJhuri.Domain.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

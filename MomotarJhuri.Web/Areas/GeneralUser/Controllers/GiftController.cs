@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using MomotarJhuri.Application.Gifts;
 using MomotarJhuri.Domain.Entities;
+using MomotarJhuri.Domain.Enums;
 
 namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers;
 
@@ -32,7 +34,7 @@ public class GiftController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var gifts = await _giftServices.GetAllGiftsAsync();
+        var gifts = await _giftServices.GetApprovedGiftsAsync();
         return View(gifts);
     }
 
@@ -66,7 +68,11 @@ public class GiftController : Controller
             {
                 Title = model.Title,
                 Location = model.Location,
+                Status = PostStatus.Pending,
+
             };
+
+            gift.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the current user's ID
 
             // 2. Create GiftDetail entity
             gift.Detail = new GiftDetail
@@ -112,7 +118,8 @@ public class GiftController : Controller
             await _giftServices.CreateGiftWithDetailsAsync(gift);
 
             TempData["Success"] = "Gift created successfully!";
-            return RedirectToAction(nameof(Index));
+            _logger.LogError("Gift Created Successfully");
+            return RedirectToAction(nameof(MyAllGifts));
         }
         catch (Exception ex)
         {
@@ -128,5 +135,16 @@ public class GiftController : Controller
         var gifts = await _giftServices.GetAllGiftsAsync();
         return View(gifts);
     }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(int Id)
+    {
+        await _giftServices.DeleteGiftWithDelailsAsync(Id);
+        TempData["Success"] = "Gift deleted successfully!";
+        _logger.LogError("Gift Deleted Successfully");
+        return RedirectToAction(nameof(MyAllGifts));
+    }
+
     #endregion
 }

@@ -3,19 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace MomotarJhuri.Infractructure.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentitySetup : Migration
+    public partial class UpdateGiftsTablewithUserIdForeignKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Users");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -35,6 +30,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -165,6 +161,68 @@ namespace MomotarJhuri.Infractructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Gifts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gifts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Gifts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GiftDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    GiftId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GiftDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GiftDetails_Gifts_GiftId",
+                        column: x => x.GiftId,
+                        principalTable: "Gifts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GiftId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Gifts_GiftId",
+                        column: x => x.GiftId,
+                        principalTable: "Gifts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -203,6 +261,22 @@ namespace MomotarJhuri.Infractructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GiftDetails_GiftId",
+                table: "GiftDetails",
+                column: "GiftId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Gifts_UserId",
+                table: "Gifts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_GiftId",
+                table: "Images",
+                column: "GiftId");
         }
 
         /// <inheritdoc />
@@ -224,40 +298,19 @@ namespace MomotarJhuri.Infractructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GiftDetails");
+
+            migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Gifts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhotoLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "Email", "Gender", "Name", "Nationality", "Password", "PhoneNumber", "PhotoLink", "Role" },
-                values: new object[,]
-                {
-                    { 1, "Dhaka", "sr@gmail.com", 0, "sr", "Bangladeshi", "password", "01700000000", "https://example.com/photo.jpg", 0 },
-                    { 2, "Dhaka2", "tf@gmail.com", 0, "tf", "Bangladeshi", "password", "01700000000", "https://example.com/photo.jpg", 0 }
-                });
         }
     }
 }

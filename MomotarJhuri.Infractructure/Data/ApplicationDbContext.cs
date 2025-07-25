@@ -15,7 +15,7 @@ namespace MomotarJhuri.Infractructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
         public DbSet<Gift> Gifts { get; set; }
-        public DbSet<GiftDetail> GiftDetail { get; set; }
+        public DbSet<GiftDetail> GiftDetails { get; set; }
         public DbSet<Image> Images { get; set; }
     }
 }

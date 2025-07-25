@@ -5,25 +5,25 @@
 namespace MomotarJhuri.Infractructure.Migrations
 {
     /// <inheritdoc />
-    public partial class change_UserName_to_FullName : Migration
+    public partial class AddStatusFieldinGiftTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "FullName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<int>(
+                name: "Status",
+                table: "Gifts",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FullName",
-                table: "AspNetUsers");
+                name: "Status",
+                table: "Gifts");
         }
     }
 }

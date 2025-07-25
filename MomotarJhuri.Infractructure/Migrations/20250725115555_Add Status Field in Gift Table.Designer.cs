@@ -12,8 +12,8 @@ using MomotarJhuri.Infractructure.Data;
 namespace MomotarJhuri.Infractructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250707114144_Identity Setup")]
-    partial class IdentitySetup
+    [Migration("20250725115555_Add Status Field in Gift Table")]
+    partial class AddStatusFieldinGiftTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,6 +180,10 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -235,6 +239,84 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Gifts");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GiftId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GiftId")
+                        .IsUnique();
+
+                    b.ToTable("GiftDetails");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GiftId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GiftId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -284,6 +366,52 @@ namespace MomotarJhuri.Infractructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+                {
+                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("Gifts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
+                {
+                    b.HasOne("MomotarJhuri.Domain.Entities.Gift", "Gift")
+                        .WithOne("Detail")
+                        .HasForeignKey("MomotarJhuri.Domain.Entities.GiftDetail", "GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Image", b =>
+                {
+                    b.HasOne("MomotarJhuri.Domain.Entities.Gift", "Gift")
+                        .WithMany("Images")
+                        .HasForeignKey("GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Gifts");
+                });
+
+            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+                {
+                    b.Navigation("Detail")
+                        .IsRequired();
+
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

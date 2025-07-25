@@ -17,29 +17,17 @@ namespace MomotarJhuri.Infractructure.Data.Configuration
                   .WithOne(d => d.Gift)
                   .HasForeignKey<GiftDetail>(d => d.GiftId)
                   .OnDelete(DeleteBehavior.Cascade);
+
             //one to many relationship with Image
             builder.HasMany(g => g.Images)
                   .WithOne(i => i.Gift)
                   .HasForeignKey(i => i.GiftId)
                   .OnDelete(DeleteBehavior.Cascade);  //যখন একটা গিপ্ট ডিলেট করবে তখন ইমেইজ টেবিল থেকেও ইমেইজ ডিলিট হবে।
 
-            // Seed initial data
-            builder.HasData(
-                new Gift
-                {
-                    Id = 1,
-                    Title = "Birthday Gift Package",
-                    Location = "Dhaka, Mirpur-10"
-                    // other properties...
-                },
-                new Gift
-                {
-                    Id = 2,
-                    Title = "Anniversary Special",
-                    Location = "Dhaka, Mirpur-12"
-                    // other properties...
-                }
-            );
+            builder.HasOne(g => g.User)
+                  .WithMany(u => u.Gifts) // If you don't have a navigation property back to Gift in ApplicationUser
+                  .HasForeignKey(g => g.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

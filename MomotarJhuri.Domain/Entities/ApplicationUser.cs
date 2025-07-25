@@ -12,5 +12,6 @@ namespace MomotarJhuri.Domain.Entities
         public string? PhotoLink { get; set; }
         public string? Nationality { get; set; }
         public Gender Gender { get; set; }
+        public ICollection<Gift> Gifts { get; set; }
     }
 }

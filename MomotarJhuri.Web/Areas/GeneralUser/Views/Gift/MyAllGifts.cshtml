@@ -6,7 +6,7 @@
 
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Gifts Collection</h1>
+        <h1>My Gifts Collection</h1>
         <a asp-action="Create" class="btn btn-primary">Add New Gift</a>
     </div>
 
@@ -19,14 +19,15 @@
                     <div class="card-body">
                         <h5 class="card-title">@gift.Title</h5>
                         <p class="text-muted"><i class="bi bi-geo-alt"></i> @gift.Location</p>
-                        <p class="card-text">@gift.Description</p>
-                        <p class="text-primary outer-line-primary">@gift.GiftStatus</p>
+                        <span class="badge bg-primary m-2">@gift.GiftStatus</span>
+                        <span class="badge bg-primary m-2">@gift.Status</span>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a asp-action="Details" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                            <a asp-controller="Gift" asp-action="GiftDetail" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-primary">Details</a>
                             <a asp-action="Edit" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-warning ms-2">Edit</a>
                             <form asp-action="Delete" asp-route-id="@gift.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this gift?');" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-outline-danger ms-2">Delete</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
