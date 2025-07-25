@@ -5,7 +5,7 @@ namespace MomotarJhuri.Application.Gifts
 {
     public interface IGiftServices
     {
-        Task<IEnumerable<GiftVM>> GetAllGiftsAsync();
+        Task<IEnumerable<GiftVM>> GetAllGiftsByUserIdAsync(string userId);
         Task<IEnumerable<GiftVM>> GetApprovedGiftsAsync();
         Task<IEnumerable<GiftVM>> GetPendingGiftsAsync();
         Task UpdateGiftStatusAsync(int giftId, PostStatus newStatus);

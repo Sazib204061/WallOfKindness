@@ -132,7 +132,8 @@ public class GiftController : Controller
     [HttpGet]
     public async Task<IActionResult> MyAllGifts()
     {
-        var gifts = await _giftServices.GetAllGiftsAsync();
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var gifts = await _giftServices.GetAllGiftsByUserIdAsync(userId);
         return View(gifts);
     }
 

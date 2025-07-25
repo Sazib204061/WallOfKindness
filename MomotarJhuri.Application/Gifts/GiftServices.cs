@@ -19,9 +19,10 @@ namespace MomotarJhuri.Application.Gifts
             _env = env;
         }
 
-        public async Task<IEnumerable<GiftVM>> GetAllGiftsAsync()
+        public async Task<IEnumerable<GiftVM>> GetAllGiftsByUserIdAsync(string userId)
         {
             return await _db.Gifts
+                .Where(g => g.UserId == userId)  // Filter by user ID
                 .Include(g => g.Detail)
                 .Include(g => g.Images)
                 .Select(g => new GiftVM
