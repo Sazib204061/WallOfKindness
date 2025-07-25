@@ -2,12 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using MomotarJhuri.Domain.Entities;
 using MomotarJhuri.Domain.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace MomotarJhuri.Application.Gifts
 {
     public class GiftVM
     {
-        public int? Id { get; set; }
+        [ValidateNever]
+        public int Id { get; set; }
         public string? Title { get; set; }
         public string? Location { get; set; }
         public PostStatus? Status { get; set; }

@@ -189,5 +189,74 @@ namespace MomotarJhuri.Application.Gifts
                 throw new Exception($"Error deleting images for gift with ID {gift.Id}: {ex.Message}");
             }
         }
+
+        public async Task UpdateGiftWithDelailsAsync(Gift gift)
+        {
+            var existingGift = await _db.Gifts
+                .Include(g => g.Detail)
+                .Include(g => g.Images)
+                .FirstOrDefaultAsync(g => g.Id == gift.Id);
+
+            if (existingGift == null)
+            {
+                throw new Exception("Gift not found.");
+            }
+
+            // Update main Gift fields
+            existingGift.Title = gift.Title;
+            existingGift.Location = gift.Location;
+            existingGift.Status = gift.Status;
+
+            // Update GiftDetail
+            if (existingGift.Detail != null)
+            {
+                existingGift.Detail.Description = gift.Detail.Description;
+                existingGift.Detail.Status = gift.Detail.Status;
+            }
+            else
+            {
+                existingGift.Detail = new GiftDetail
+                {
+                    Description = gift.Detail.Description,
+                    Status = gift.Detail.Status,
+                    Gift = existingGift
+                };
+            }
+
+            // 🧹 Step: Remove old images from file system + database
+            if (existingGift.Images != null && existingGift.Images.Any())
+            {
+                var uploadsPath = Path.Combine(_env.WebRootPath, "uploads", "gifts");
+
+                foreach (var oldImage in existingGift.Images)
+                {
+                    var filePath = Path.Combine(uploadsPath, Path.GetFileName(oldImage.ImageUrl));
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath); // ✅ Delete from folder
+                    }
+                }
+
+                _db.Images.RemoveRange(existingGift.Images); // ✅ Remove from DB
+            }
+
+            // ➕ Step: Add new images (from controller)
+            if (gift.Images != null && gift.Images.Any())
+            {
+                existingGift.Images = new List<Image>();
+                foreach (var img in gift.Images)
+                {
+                    existingGift.Images.Add(new Image
+                    {
+                        ImageUrl = img.ImageUrl,
+                        Gift = existingGift
+                    });
+                }
+            }
+
+            _db.Gifts.Update(existingGift);
+            await _db.SaveChangesAsync();
+        }
+
     }
 }

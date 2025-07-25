@@ -30,4 +30,8 @@
     <ProjectReference Include="..\MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\gifts\" />
+  </ItemGroup>
+
 </Project>
