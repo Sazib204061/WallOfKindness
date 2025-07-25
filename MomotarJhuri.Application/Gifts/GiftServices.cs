@@ -62,6 +62,40 @@ namespace MomotarJhuri.Application.Gifts
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<GiftVM>> GetPendingGiftsAsync()
+        {
+            return await _db.Gifts
+                .Where(g => g.Status == PostStatus.Pending) // Filter by Approved status
+                .Include(g => g.Detail)
+                .Include(g => g.Images)
+                .Include(g => g.User) // Optional: Include user details if needed
+                .Select(g => new GiftVM
+                {
+                    Id = g.Id,
+                    Title = g.Title,
+                    Location = g.Location,
+                    Status = g.Status,
+                    Description = g.Detail.Description,
+                    GiftStatus = g.Detail.Status,
+                    PrimaryImageUrl = g.Images.FirstOrDefault().ImageUrl,
+                    ImageUrls = g.Images.Select(i => i.ImageUrl).ToList(),
+                    UserFullName = g.User.FullName, // Optional
+                    UserEmail = g.User.Email,      // Optional
+                    UserPhoneNumber = g.User.PhoneNumber // Optional
+                })
+                .ToListAsync();
+        }
+
+        public async Task UpdateGiftStatusAsync(int giftId, PostStatus newStatus)
+        {
+            var gift = await _db.Gifts.FindAsync(giftId);
+            if (gift == null)
+                throw new Exception("Gift not found.");
+
+            gift.Status = newStatus; // Update status
+            await _db.SaveChangesAsync();
+        }
+
 
 
         public async Task<GiftVM> GetGiftFullDetailsById(int Id)
