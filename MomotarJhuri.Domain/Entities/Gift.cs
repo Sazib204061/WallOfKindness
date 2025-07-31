@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using MomotarJhuri.Domain.Enums;
+using WallOfKindness.Domain.Enums;
 
-namespace MomotarJhuri.Domain.Entities
+namespace WallOfKindness.Domain.Entities
 {
     public class Gift
     {

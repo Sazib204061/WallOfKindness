@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using MomotarJhuri.Application.Gifts;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Infractructure.Data;
+using WallOfKindness.Application.Gifts;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Infractructure.Data;
 using Moq;
 
-namespace MomotarJhuri.UnitTests.Services
+namespace WallOfKindness.UnitTests.Services
 {
     public class GiftServices_CreateTests
     {

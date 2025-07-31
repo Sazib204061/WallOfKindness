@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MomotarJhuri.Web.Areas.GeneralUser.ViewModel
+namespace WallOfKindness.Web.Areas.GeneralUser.ViewModel
 {
     public class LoginVM
     {

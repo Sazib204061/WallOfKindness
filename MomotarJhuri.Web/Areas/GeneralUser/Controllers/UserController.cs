@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Web.Areas.GeneralUser.ViewModel;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Web.Areas.GeneralUser.ViewModel;
 
-namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
+namespace WallOfKindness.Web.Areas.GeneralUser.Controllers
 {
 
     public class UserController : Controller

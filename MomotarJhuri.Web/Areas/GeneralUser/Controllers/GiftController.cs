@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using MomotarJhuri.Application.Gifts;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Domain.Enums;
+using WallOfKindness.Application.Gifts;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Domain.Enums;
 
-namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers;
+namespace WallOfKindness.Web.Areas.GeneralUser.Controllers;
 
 public class GiftController : Controller
 {

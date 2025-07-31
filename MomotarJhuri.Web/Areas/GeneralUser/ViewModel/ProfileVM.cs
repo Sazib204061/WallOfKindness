@@ -1,6 +1,6 @@
-﻿using MomotarJhuri.Domain.Enums;
+﻿using WallOfKindness.Domain.Enums;
 
-namespace MomotarJhuri.Web.Areas.GeneralUser.ViewModel
+namespace WallOfKindness.Web.Areas.GeneralUser.ViewModel
 {
     public class ProfileVM
     {

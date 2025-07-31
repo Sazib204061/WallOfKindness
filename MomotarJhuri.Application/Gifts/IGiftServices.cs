@@ -1,7 +1,7 @@
-﻿using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Domain.Enums;
+﻿using WallOfKindness.Domain.Entities;
+using WallOfKindness.Domain.Enums;
 
-namespace MomotarJhuri.Application.Gifts
+namespace WallOfKindness.Application.Gifts
 {
     public interface IGiftServices
     {

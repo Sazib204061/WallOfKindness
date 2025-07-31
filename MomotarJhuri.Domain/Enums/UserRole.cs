@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MomotarJhuri.Domain.Enums
+namespace WallOfKindness.Domain.Enums
 {
     public enum UserRole
     {

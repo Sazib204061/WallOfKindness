@@ -22,7 +22,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\MomotarJhuri.Domain\MomotarJhuri.Domain.csproj" />
+    <ProjectReference Include="..\MomotarJhuri.Domain\WallOfKindness.Domain.csproj" />
   </ItemGroup>
 
 

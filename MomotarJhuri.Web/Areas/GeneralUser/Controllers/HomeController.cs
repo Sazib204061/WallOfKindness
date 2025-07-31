@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MomotarJhuri.Web.Models;
+using WallOfKindness.Web.Models;
 
-namespace MomotarJhuri.Web.Areas.GeneralUser.Controllers
+namespace WallOfKindness.Web.Areas.GeneralUser.Controllers
 {
     public class HomeController : Controller
     {

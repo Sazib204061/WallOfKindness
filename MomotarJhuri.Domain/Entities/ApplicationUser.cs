@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using MomotarJhuri.Domain.Enums;
+using WallOfKindness.Domain.Enums;
 
-namespace MomotarJhuri.Domain.Entities
+namespace WallOfKindness.Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {

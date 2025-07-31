@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MomotarJhuri.Infractructure.Data;
+using WallOfKindness.Infractructure.Data;
 
 #nullable disable
 
-namespace MomotarJhuri.Infractructure.Migrations
+namespace WallOfKindness.Infractructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250725115555_Add Status Field in Gift Table")]
@@ -158,7 +158,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -239,7 +239,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.Gift", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,7 +270,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.ToTable("Gifts");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.GiftDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,7 +295,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.ToTable("GiftDetails");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Image", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,7 +328,7 @@ namespace MomotarJhuri.Infractructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", null)
+                    b.HasOne("WallOfKindness.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -337,7 +337,7 @@ namespace MomotarJhuri.Infractructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", null)
+                    b.HasOne("WallOfKindness.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -352,7 +352,7 @@ namespace MomotarJhuri.Infractructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", null)
+                    b.HasOne("WallOfKindness.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -361,16 +361,16 @@ namespace MomotarJhuri.Infractructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", null)
+                    b.HasOne("WallOfKindness.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.Gift", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.ApplicationUser", "User")
+                    b.HasOne("WallOfKindness.Domain.Entities.ApplicationUser", "User")
                         .WithMany("Gifts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -379,20 +379,20 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.GiftDetail", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.GiftDetail", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.Gift", "Gift")
+                    b.HasOne("WallOfKindness.Domain.Entities.Gift", "Gift")
                         .WithOne("Detail")
-                        .HasForeignKey("MomotarJhuri.Domain.Entities.GiftDetail", "GiftId")
+                        .HasForeignKey("WallOfKindness.Domain.Entities.GiftDetail", "GiftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Gift");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Image", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.Image", b =>
                 {
-                    b.HasOne("MomotarJhuri.Domain.Entities.Gift", "Gift")
+                    b.HasOne("WallOfKindness.Domain.Entities.Gift", "Gift")
                         .WithMany("Images")
                         .HasForeignKey("GiftId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,12 +401,12 @@ namespace MomotarJhuri.Infractructure.Migrations
                     b.Navigation("Gift");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Gifts");
                 });
 
-            modelBuilder.Entity("MomotarJhuri.Domain.Entities.Gift", b =>
+            modelBuilder.Entity("WallOfKindness.Domain.Entities.Gift", b =>
                 {
                     b.Navigation("Detail")
                         .IsRequired();

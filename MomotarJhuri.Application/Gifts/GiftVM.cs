@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Domain.Enums;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Domain.Enums;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace MomotarJhuri.Application.Gifts
+namespace WallOfKindness.Application.Gifts
 {
     public class GiftVM
     {

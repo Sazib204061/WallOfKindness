@@ -1,4 +1,4 @@
-﻿namespace MomotarJhuri.Domain.Entities
+﻿namespace WallOfKindness.Domain.Entities
 {
     public class Image
     {

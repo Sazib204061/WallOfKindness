@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MomotarJhuri.Application.Gifts;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Infractructure.Data;
+using WallOfKindness.Application.Gifts;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Infractructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MomotarJhuri.Domain.Entities;
+using WallOfKindness.Domain.Entities;
 
-namespace MomotarJhuri.Infractructure.Data
+namespace WallOfKindness.Infractructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

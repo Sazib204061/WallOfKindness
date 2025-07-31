@@ -1,4 +1,4 @@
-namespace MomotarJhuri.Web.Models
+namespace WallOfKindness.Web.Models
 {
     public class ErrorViewModel
     {

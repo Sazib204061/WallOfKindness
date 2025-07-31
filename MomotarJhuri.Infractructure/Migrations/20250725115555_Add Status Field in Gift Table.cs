@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MomotarJhuri.Infractructure.Migrations
+namespace WallOfKindness.Infractructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddStatusFieldinGiftTable : Migration

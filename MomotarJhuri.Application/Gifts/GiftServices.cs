@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MomotarJhuri.Domain.Entities;
-using MomotarJhuri.Domain.Enums;
-using MomotarJhuri.Infractructure.Data;
+using WallOfKindness.Domain.Entities;
+using WallOfKindness.Domain.Enums;
+using WallOfKindness.Infractructure.Data;
 
-namespace MomotarJhuri.Application.Gifts
+namespace WallOfKindness.Application.Gifts
 {
     public class GiftServices : IGiftServices
     {

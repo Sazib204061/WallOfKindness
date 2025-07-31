@@ -1,5 +1,5 @@
-﻿using MomotarJhuri.Domain.Enums;
-namespace MomotarJhuri.Domain.Entities
+﻿using WallOfKindness.Domain.Enums;
+namespace WallOfKindness.Domain.Entities
 {
     public class GiftDetail
     {

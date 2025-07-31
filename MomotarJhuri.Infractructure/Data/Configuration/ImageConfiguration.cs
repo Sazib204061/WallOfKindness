@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MomotarJhuri.Domain.Entities;
+using WallOfKindness.Domain.Entities;
 
-namespace MomotarJhuri.Infractructure.Data.Configuration
+namespace WallOfKindness.Infractructure.Data.Configuration
 {
     internal class ImageConfiguration : IEntityTypeConfiguration<Image>
     {
