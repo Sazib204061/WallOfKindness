@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomotarJhuri.Web", "MomotarJhuri.Web\MomotarJhuri.Web.csproj", "{750E2717-35CF-42D9-9CA0-24D7DF7E565A}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomotarJhuri.Application", "MomotarJhuri.Application\MomotarJhuri.Application.csproj", "{23D3D059-F0A4-449A-8447-8F998A7BA5B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomotarJhuri.Infractructure", "MomotarJhuri.Infractructure\MomotarJhuri.Infractructure.csproj", "{CFC31759-AC9B-496E-85A3-2DAE3BCDD600}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomotarJhuri.UnitTests", "MomotarJhuri.UnitTests\MomotarJhuri.UnitTests.csproj", "{A94399E1-6F70-4FAD-81E1-F8D592ABDA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CFC31759-AC9B-496E-85A3-2DAE3BCDD600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFC31759-AC9B-496E-85A3-2DAE3BCDD600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFC31759-AC9B-496E-85A3-2DAE3BCDD600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94399E1-6F70-4FAD-81E1-F8D592ABDA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94399E1-6F70-4FAD-81E1-F8D592ABDA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94399E1-6F70-4FAD-81E1-F8D592ABDA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94399E1-6F70-4FAD-81E1-F8D592ABDA15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
