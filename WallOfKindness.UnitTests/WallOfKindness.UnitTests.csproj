@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MomotarJhuri.Application\WallOfKindness.Application.csproj" />
+    <ProjectReference Include="..\WallOfKindness.Application\WallOfKindness.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

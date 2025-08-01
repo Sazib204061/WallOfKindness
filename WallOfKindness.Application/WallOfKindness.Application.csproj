@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MomotarJhuri.Domain\WallOfKindness.Domain.csproj" />
-    <ProjectReference Include="..\MomotarJhuri.Infractructure\WallOfKindness.Infractructure.csproj" />
+    <ProjectReference Include="..\WallOfKindness.Domain\WallOfKindness.Domain.csproj" />
+    <ProjectReference Include="..\WallOfKindness.Infractructure\WallOfKindness.Infractructure.csproj" />
   </ItemGroup>
 
 </Project>

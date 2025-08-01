@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MomotarJhuri.Application\WallOfKindness.Application.csproj" />
-	  <ProjectReference Include="..\MomotarJhuri.Infractructure\WallOfKindness.Infractructure.csproj" />
+    <ProjectReference Include="..\WallOfKindness.Application\WallOfKindness.Application.csproj" />
+	  <ProjectReference Include="..\WallOfKindness.Infractructure\WallOfKindness.Infractructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
