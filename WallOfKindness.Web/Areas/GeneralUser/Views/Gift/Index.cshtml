@@ -1,0 +1,32 @@
+﻿@model IEnumerable<GiftVM>
+
+@{
+    ViewData["Title"] = "Gift List";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to Wall of Kindness</h1>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var gift in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@gift.PrimaryImageUrl" class="card-img-top" alt="@gift.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@gift.Title</h5>
+                        <p class="text-muted"><i class="bi bi-geo-alt"></i> @gift.Location</p>
+                        @* <p class="card-text">@gift.Description</p> *@
+                        <span class="badge bg-primary">@gift.GiftStatus</span>
+                       
+                        <div class="d-flex justify-content-end align-items-center">
+                            <a asp-controller="Gift" asp-action="GiftDetail" asp-route-id="@gift.Id" class="btn btn-sm btn-outline-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
