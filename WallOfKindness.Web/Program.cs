@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WallOfKindness.Application.Gifts;
+using WallOfKindness.Application.Users;
 using WallOfKindness.Domain.Entities;
 using WallOfKindness.Infractructure.Data;
+using WallOfKindness.Web.Infrastructure.ViewLocationExpanders;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -16,6 +18,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
      .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IGiftServices, GiftServices>();
+builder.Services.AddScoped<IUserServices, UserServices>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -23,6 +26,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/User/Logout";
     options.AccessDeniedPath = "/User/AccessDenied";
 });
+
+builder.Services.AddControllersWithViews()
+    .AddRazorOptions(options =>
+    {
+        options.ViewLocationExpanders.Add(new CustomViewLocationExpander());
+    });
 
 
 var app = builder.Build();
@@ -44,13 +53,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Gift}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}",
+    pattern: "{controller=Gift}/{action=Index}/{id?}",
     defaults: new { area = "GeneralUser" });
 
 app.Run();

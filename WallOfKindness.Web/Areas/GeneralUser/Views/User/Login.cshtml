@@ -33,9 +33,11 @@
                 <a asp-controller="User" asp-action="Register" class="btn btn-link rounded text-decoration-none">
                     <i class="bi bi-person-plus me-1"></i> Register
                 </a>
-                <a asp-controller="Home" asp-action="Index" class="btn btn-link rounded text-decoration-none">
-                    <i class="bi bi-arrow-left me-1"></i> Back
-                </a>
+                <div class="mt-4 d-flex gap-2 justify-content-end">
+                    <a href="@(Context.Request.Headers["Referer"].ToString())" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
             </div>
         </form>
     </div>

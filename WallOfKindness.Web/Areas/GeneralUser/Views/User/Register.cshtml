@@ -104,10 +104,12 @@
             </button>
 
             <div class="d-flex justify-content-between align-items-center mt-3">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
-                    <i class="bi bi-arrow-left me-1"></i> Back to Home
-                </a>
-                <div>
+                <div class="mt-4 d-flex gap-2 justify-content-end">
+                    <a href="@(Context.Request.Headers["Referer"].ToString())" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
+                <div class="mt-4 d-flex gap-2 justify-content-end">
                     Already have an account?
                     <a asp-controller="User" asp-action="Login" class="text-decoration-none">Login</a>
                 </div>

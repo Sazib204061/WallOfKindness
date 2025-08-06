@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WallOfKindness.Application.Gifts;
 using WallOfKindness.Domain.Enums;
+using WallOfKindness.Web.Areas.GeneralUser.Controllers;
 
-namespace WallOfKindness.Web.Areas.GeneralUser.Controllers
+namespace WallOfKindness.Web.Areas.Moderator.Controllers
 {
-    public class ModaratorController : Controller
+    public class ModeratorController : Controller
     {
         private readonly ILogger<GiftController> _logger;
         private readonly IGiftServices _giftServices;
         private readonly IWebHostEnvironment _env;
 
-        public ModaratorController(
+        public ModeratorController(
             ILogger<GiftController> logger,
             IGiftServices giftServices,
             IWebHostEnvironment env)
@@ -20,10 +21,9 @@ namespace WallOfKindness.Web.Areas.GeneralUser.Controllers
             _env = env;
         }
 
-
-        
-        
+       
         [HttpGet]
+
         public async Task<IActionResult> Dashboard()
         {
             var PendingGifts = await _giftServices.GetPendingGiftsAsync();
